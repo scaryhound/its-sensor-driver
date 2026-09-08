@@ -1,6 +1,7 @@
 # Cross-compilation variables (Yocto will override these)
 CC ?= gcc
 CFLAGS ?= -Wall -Wextra -g
+LDFLAGS ?= -lcjson -lmosquitto
 
 # Kernel Module variables
 obj-m := its_sensor.o
@@ -17,7 +18,7 @@ all: $(APP_NAME) module
 
 # Compile the user-space daemon
 $(APP_NAME): $(SRC)
-	$(CC) $(CFLAGS) -o $(APP_NAME) $(SRC)
+	$(CC) $(CFLAGS) -o $(APP_NAME) $(SRC) $(LDFLAGS)
 
 # Compile the kernel module
 module:
